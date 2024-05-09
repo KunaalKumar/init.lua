@@ -3,7 +3,7 @@ return {
     name = "rose-pine",
     config = function()
         require("rose-pine").setup({
-            disable_background = false,
+            disable_background = true,
             styles = {
                 bol = true,
                 italic = false,

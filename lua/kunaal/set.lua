@@ -1,6 +1,4 @@
-require("kunaal.remap")
-require("kunaal.lazy_init")
-require("kunaal.set")
+vim.opt.guicursor = ""
 
 vim.opt.tabstop=4
 vim.opt.expandtab=true
