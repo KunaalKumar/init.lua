@@ -1,6 +1,6 @@
+require("kunaal.set")
 require("kunaal.remap")
 require("kunaal.lazy_init")
-require("kunaal.set")
 
 local autocmd = vim.api.nvim_create_autocmd
 
