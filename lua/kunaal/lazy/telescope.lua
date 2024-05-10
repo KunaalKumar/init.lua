@@ -8,7 +8,7 @@ return {
 
         local builtin = require('telescope.builtin')
 
-        --vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+        --vim.keymap.set('n', '<C-S-p>', builtin.find_files,{})
 
         -- fallback to find_files if git file search fails. 
         vim.keymap.set('n', '<C-p>', function()
