@@ -18,9 +18,11 @@ vim.opt.wrap=false
 vim.opt.number=true
 vim.opt.relativenumber=true
 
-vim.opt.signcolumn="yes"
+--vim.opt.signcolumn="yes"
 
 vim.opt.updatetime=50
 
 vim.g.mapleader = " "
+
+vim.o.autoread = true
 

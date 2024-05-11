@@ -13,5 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = "kunaal.lazy",
-    change_detection = { enabled = false },
+    change_detection = {
+        enabled = true,
+        notify = false,
+    },
 })
