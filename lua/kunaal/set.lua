@@ -18,7 +18,7 @@ vim.opt.wrap=false
 vim.opt.number=true
 vim.opt.relativenumber=true
 
---vim.opt.signcolumn="yes"
+vim.opt.signcolumn="yes"
 
 vim.opt.updatetime=50
 
@@ -26,3 +26,9 @@ vim.g.mapleader = " "
 
 vim.o.autoread = true
 
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- enable 24-bit colour
+vim.opt.termguicolors = true
