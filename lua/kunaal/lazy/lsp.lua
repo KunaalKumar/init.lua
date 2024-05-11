@@ -48,6 +48,13 @@ return {
                         }
                     }
                 end,
+
+                ["typos_lsp"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.typos_lsp.setup {
+                        capabilities = capabilities,
+                    }
+                end,
             }
         })
 

@@ -22,8 +22,6 @@ vim.opt.signcolumn="yes"
 
 vim.opt.updatetime=50
 
-vim.g.mapleader = " "
-
 vim.o.autoread = true
 
 -- disable netrw
@@ -32,3 +30,8 @@ vim.g.loaded_netrwPlugin = 1
 
 -- enable 24-bit colour
 vim.opt.termguicolors = true
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+vim.g.have_nerd_font = 1
+

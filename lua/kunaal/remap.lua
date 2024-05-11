@@ -1,5 +1,6 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader><tab>", "<C-^>", {noremap=true})
+vim.keymap.set('n', '<S-Tab>', '<C-^>', {noremap = true, silent = true})
+
 --
 --vim.keymap.set("n", "<C-e>", ":Lexplore %:p:h<CR>", {noremap=true})
 --vim.keymap.set("n", "<C-e>", function()
