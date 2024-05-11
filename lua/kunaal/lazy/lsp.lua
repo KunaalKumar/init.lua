@@ -2,6 +2,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
         "williamboman/mason.nvim",
+        "folke/neodev.nvim",
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -22,6 +23,10 @@ return {
             cmp_lsp.default_capabilities())
 
         require("mason").setup()
+        -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+        require("neodev").setup({
+            -- add any options here, or leave empty to use the default settings
+        })
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",

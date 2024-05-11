@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 vim.opt.guicursor=""
 
 vim.opt.tabstop=4
@@ -6,6 +8,7 @@ vim.opt.shiftwidth=4
 vim.opt.expandtab=true
 
 vim.opt.hlsearch=true
+vim.keymap.set("n", "<ESC>", ":nohlsearch<CR>")
 vim.opt.incsearch=true
 
 vim.opt.swapfile=false
@@ -19,9 +22,7 @@ vim.opt.number=true
 vim.opt.relativenumber=true
 
 vim.opt.signcolumn="yes"
-
 vim.opt.updatetime=50
-
 vim.o.autoread = true
 
 -- disable netrw
@@ -31,7 +32,15 @@ vim.g.loaded_netrwPlugin = 1
 -- enable 24-bit colour
 vim.opt.termguicolors = true
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 vim.g.have_nerd_font = 1
+vim.opt.mouse = "a"
+vim.opt.clipboard = "unnamedplus"
+vim.opt.breakindent = true
+
+-- Case insensitive searching UNLESS /C or capital in search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.inccommand = "split"
+vim.opt.cursorline = false
+vim.opt.scrolloff = 10
 
