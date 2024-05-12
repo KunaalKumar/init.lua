@@ -4,6 +4,7 @@ return {
         name = "catppuccin",
         config = function()
             require("catppuccin").setup({
+                flavour = "macchiato",
                 transparent_background = true,
                 integrations = {
                     cmp = true,
