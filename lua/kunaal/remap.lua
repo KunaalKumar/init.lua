@@ -21,7 +21,10 @@ vim.keymap.set('n', '<S-Tab>', '<C-^>', {noremap = true, silent = true})
 --    vim.cmd("/" .. current_file_name)
 --end, {noremap=true})
 
+-- space + w to save
 vim.keymap.set("n", "<leader>w", ":w<CR>")
+-- Yank to macOS clipboard
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -99,6 +102,14 @@ autocmd('LspAttach', {
 
         -- iTerm2 Remaps
         vim.keymap.set("n", "_-NvimCodeActionsRemap-_", function() vim.lsp.buf.code_action() end, opts)
+    end
+})
+
+autocmd("TextYankPost", {
+    desc = "Highlight when yanking text",
+    group = vim.api.nvim_create_augroup("highlight-yank", {clear = true}),
+    callback = function()
+        vim.highlight.on_yank()
     end
 })
 

@@ -34,7 +34,7 @@ vim.opt.termguicolors = true
 
 vim.g.have_nerd_font = 1
 vim.opt.mouse = "a"
-vim.opt.clipboard = "unnamedplus"
+--vim.opt.clipboard = "unnamedplus"
 vim.opt.breakindent = true
 
 -- Case insensitive searching UNLESS /C or capital in search
