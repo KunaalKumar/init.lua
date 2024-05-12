@@ -1,5 +1,5 @@
-vim.keymap.set("n", "<leader><tab>", "<C-^>", {noremap=true})
-vim.keymap.set('n', '<S-Tab>', '<C-^>', {noremap = true, silent = true})
+vim.keymap.set("n", "<leader><tab>", "<C-^>", { noremap = true })
+vim.keymap.set("n", "<S-Tab>", "<C-^>", { noremap = true, silent = true })
 
 --
 --vim.keymap.set("n", "<C-e>", ":Lexplore %:p:h<CR>", {noremap=true})
@@ -24,7 +24,11 @@ vim.keymap.set('n', '<S-Tab>', '<C-^>', {noremap = true, silent = true})
 -- space + w to save
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 -- Yank to macOS clipboard
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+-- Format using LSP
+-- vim.keymap.set({ "n", "v" }, "gg=G", "<cmd>lua  vim.lsp.buf.format({ async = true })<CR>",
+--     { noremap = true, silent = true })
+
 
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -37,7 +41,7 @@ local function find_right_vertical_split()
     -- Scan all windows in the current tab page
     local windows = vim.api.nvim_list_wins()
     for _, win in ipairs(windows) do
-        if win ~= current_win then  -- Skip the current window
+        if win ~= current_win then -- Skip the current window
             local win_position = vim.api.nvim_win_get_position(win)
 
             -- Check if the window is vertically aligned and to the right
@@ -46,7 +50,7 @@ local function find_right_vertical_split()
             end
         end
     end
-    return nil  -- No vertical split to the right found
+    return nil -- No vertical split to the right found
 end
 
 local function open_file(win, file, line, column)
@@ -61,15 +65,14 @@ local function open_file(win, file, line, column)
     vim.api.nvim_command("edit " .. file)
 
     if line then
-        vim.api.nvim_win_set_cursor(win, {line, column or 0})
-
+        vim.api.nvim_win_set_cursor(win, { line, column or 0 })
     end
 end
 
-autocmd('LspAttach', {
+autocmd("LspAttach", {
     callback = function(e)
         local opts = { buffer = e.buf }
-        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition({reuse_win = true}) end, opts)
+        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition({ reuse_win = true }) end, opts)
         vim.keymap.set("n", "gD", function()
             vim.lsp.buf.definition({
                 on_list = function(options)
@@ -107,9 +110,16 @@ autocmd('LspAttach', {
 
 autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
-    group = vim.api.nvim_create_augroup("highlight-yank", {clear = true}),
+    group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
     callback = function()
         vim.highlight.on_yank()
     end
 })
 
+autocmd("BufWritePre", {
+    desc = "Format on save",
+    pattern = "*",
+    callback = function()
+        vim.lsp.buf.format({ async = false })
+    end
+})
