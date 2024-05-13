@@ -55,7 +55,7 @@ return {
                 mappings = {
                     n = { ["q"] = actions.close },
                     i = {
-                        ["<ESC>"] = actions.close,
+                        -- ["<ESC>"] = actions.close,
                         ["<C-k>"] = actions.move_selection_previous,
                         ["<C-j>"] = actions.move_selection_next,
                     },
@@ -90,6 +90,19 @@ return {
         vim.keymap.set("n", "<leader>gs", function()
             builtin.grep_string({
                 search = vim.fn.input("Grep > ") })
+        end)
+
+        vim.keymap.set("n", "<leader>fs", function()
+            local folder = vim.fn.input({
+                prompt = "Search in folder > ",
+                default = vim.fn.expand('%:p:h'),
+                completion = "dir",
+                history = "search",
+            })
+            builtin.grep_string({
+                search = vim.fn.input("Grep > "),
+                search_dirs = { folder }
+            })
         end)
 
         vim.keymap.set("n", "_-NvimSearchOpenBuffers-_", "<cmd>Telescope current_buffer_fuzzy_find<CR>", {})
