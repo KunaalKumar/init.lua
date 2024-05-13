@@ -4,9 +4,11 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
 
     config = function()
+        local actions = require("telescope.actions")
 
         local options = {
-            defaults = { vimgrep_arguments = {
+            defaults = {
+                vimgrep_arguments = {
                     "rg",
                     "-L",
                     "--color=never",
@@ -51,7 +53,12 @@ return {
                 -- Developer configurations: Not meant for general override
                 buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
                 mappings = {
-                    n = { ["q"] = require("telescope.actions").close },
+                    n = { ["q"] = actions.close },
+                    i = {
+                        ["<ESC>"] = actions.close,
+                        ["<C-k>"] = actions.move_selection_previous,
+                        ["<C-j>"] = actions.move_selection_next,
+                    },
                 },
             },
 
@@ -72,16 +79,16 @@ return {
 
         --vim.keymap.set("n", "<C-S-p>", builtin.find_files,{})
 
-        -- fallback to find_fileea if git file search fails. 
+        -- fallback to find_fileea if git file search fails.
         vim.keymap.set("n", "<C-p>", function()
-            local success, git_files = pcall(builtin.git_files, {show_untracked=true})
+            local success, git_files = pcall(builtin.git_files, { show_untracked = true })
             if not success then
                 builtin.find_files({})
             end
         end)
 
         vim.keymap.set("n", "<leader>gs", function()
-            builtin.grep_string({ 
+            builtin.grep_string({
                 search = vim.fn.input("Grep > ") })
         end)
 
