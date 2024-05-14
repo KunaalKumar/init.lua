@@ -116,10 +116,16 @@ autocmd("TextYankPost", {
     end
 })
 
+vim.api.nvim_create_user_command("Wnof", function()
+    vim.b.disable_autoformat = true
+    vim.cmd("write")
+    vim.b.disable_autoformat = false
+end, { bang = true })
+
 autocmd("BufWritePre", {
-    desc = "Format on save",
-    pattern = "*",
     callback = function()
-        vim.lsp.buf.format({ async = false })
+        if not vim.b.disable_autoformat then
+            vim.lsp.buf.format({ async = false })
+        end
     end
 })
