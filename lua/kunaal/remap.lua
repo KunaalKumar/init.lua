@@ -1,28 +1,7 @@
 vim.keymap.set("n", "<leader><tab>", "<C-^>", { noremap = true })
 vim.keymap.set("n", "<S-Tab>", "<C-^>", { noremap = true, silent = true })
 
---
---vim.keymap.set("n", "<C-e>", ":Lexplore %:p:h<CR>", {noremap=true})
---vim.keymap.set("n", "<C-e>", function()
---    -- Look for a netrw window and if found, close it.
---    local windows = vim.api.nvim_list_wins()
---    for _, win in ipairs(windows) do
---        local buf = vim.api.nvim_win_get_buf(win)
---        local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
---        if filetype == "netrw" then
---            vim.api.nvim_win_close(win, false)
---            return
---        end
---    end
---
---    -- If a netrw window wasn"t found open one.
---    local current_file_name = vim.fn.expand("%:t")
---    vim.cmd("Lexplore %:p:h")
---    vim.cmd("/" .. current_file_name)
---end, {noremap=true})
-
--- space + w to save
-vim.keymap.set("n", "<leader>w", ":w<CR>")
+vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "save" })
 -- Yank to macOS clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 -- Format using LSP
@@ -123,9 +102,18 @@ vim.api.nvim_create_user_command("Wnof", function()
 end, { bang = true })
 
 autocmd("BufWritePre", {
+    desc = "Format on save",
     callback = function()
         if not vim.b.disable_autoformat then
             vim.lsp.buf.format({ async = false })
         end
+    end
+})
+
+autocmd("FileType", {
+    desc = "Close the quickfix window with <ESC>",
+    pattern = "qf",
+    callback = function()
+        vim.keymap.set("n", "<ESC>", ":cclose<CR>", { noremap = true, silent = true })
     end
 })

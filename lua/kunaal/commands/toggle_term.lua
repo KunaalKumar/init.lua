@@ -11,12 +11,12 @@ local function openTerminal()
     if fun.bufexists(te_buf) ~= 1 then
         vim.cmd([[
           augroup MyTerminalToggle
-            autocmd!
-            autocmd TermOpen * setlocal nonumber norelativenumber signcolumn=no
-            autocmd TermOpen * setlocal winhighlight=Normal:MyTerminalToggleHighlightGroup
-            highlight MyTerminalToggleHighlightGroup guibg=#1e222a guifg=#abb2bf
+          autocmd!
+          autocmd TermOpen * setlocal nonumber norelativenumber signcolumn=no
+          autocmd TermOpen * setlocal winhighlight=Normal:MyTerminalToggleHighlightGroup
+          highlight MyTerminalToggleHighlightGroup guibg=#1e222a guifg=#abb2bf
           augroup END
-        ]], false)
+          ]], false)
 
         cmd("sp | winc J | res 10 | te")
         te_win_id = getid()
@@ -43,4 +43,6 @@ function ToggleTerminal()
     end
 end
 
-vim.keymap.set({ "n", "t" }, "<C-`>", "<cmd>lua ToggleTerminal()<CR>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "t" }, "<C-`>", function()
+    ToggleTerminal()
+end, { noremap = true, silent = true })

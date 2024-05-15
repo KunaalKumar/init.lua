@@ -11,26 +11,23 @@ return {
           gitsigns = true,
           nvimtree = true,
           treesitter = true,
-          notify = false,
           mason = true,
+          harpoon = true,
+          dropbar = {
+            enabled = true,
+            color_mode = true,
+          },
+          hop = true,
+          markdown = true,
+          lsp_trouble = true,
+          illuminate = {
+            enabled = true,
+            lsp = true,
+          },
+          which_key = true,
         }
       })
       vim.cmd.colorscheme "catppuccin"
     end
-  },
-  {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    --config = function()
-    --    require("rose-pine").setup({
-    --        disable_background = true,
-    --        styles = {
-    --            bol = true,
-    --            italic = false,
-    --        },
-    --    })
-
-    --    vim.cmd("colorscheme rose-pine")
-    --end
   },
 }
