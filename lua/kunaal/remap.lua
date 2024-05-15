@@ -15,7 +15,7 @@ vim.keymap.set("n", "<S-Tab>", "<C-^>", { noremap = true, silent = true })
 --        end
 --    end
 --
---    -- If a netrw window wasn't found open one.
+--    -- If a netrw window wasn"t found open one.
 --    local current_file_name = vim.fn.expand("%:t")
 --    vim.cmd("Lexplore %:p:h")
 --    vim.cmd("/" .. current_file_name)
