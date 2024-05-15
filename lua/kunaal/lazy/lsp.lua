@@ -29,9 +29,6 @@ return {
         -- add any options here, or leave empty to use the default settings
       })
       require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls",
-        },
         handlers = {
           function(server_name) -- default handler (optional)
             require("lspconfig")[server_name].setup {
