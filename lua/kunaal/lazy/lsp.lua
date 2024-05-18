@@ -45,6 +45,9 @@ return {
                   runtime = { version = "Lua 5.4.6" },
                   diagnostics = {
                     globals = { "vim", "it", "describe", "before_each", "after_each" },
+                  },
+                  hint = {
+                    enable = true,
                   }
                 }
               }

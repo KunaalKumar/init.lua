@@ -51,7 +51,7 @@ end
 autocmd("LspAttach", {
     callback = function(e)
         -- Enable by inlay hints default.
-        vim.lsp.inlay_hint.enable(true)
+        vim.lsp.inlay_hint.enable(true, {})
         -- Run code lens on startup.
         vim.lsp.codelens.run()
 
