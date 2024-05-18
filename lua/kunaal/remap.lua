@@ -50,6 +50,11 @@ end
 
 autocmd("LspAttach", {
     callback = function(e)
+        -- Enable by inlay hints default.
+        vim.lsp.inlay_hint.enable(true)
+        -- Run code lens on startup.
+        vim.lsp.codelens.run()
+
         local opts = { buffer = e.buf }
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition({ reuse_win = true }) end, opts)
         vim.keymap.set("n", "gD", function()
@@ -81,6 +86,10 @@ autocmd("LspAttach", {
         vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
         vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+        vim.keymap.set("n", "<leader>h", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
+            print("Inlay hint status: " .. tostring(vim.lsp.inlay_hint.is_enabled()))
+        end, { desc = "Toggle inlay hints" })
 
         -- iTerm2 Remaps
         vim.keymap.set("n", "_-NvimCodeActionsRemap-_", function() vim.lsp.buf.code_action() end, opts)
