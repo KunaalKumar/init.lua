@@ -14,6 +14,10 @@ return {
       "saadparwaiz1/cmp_luasnip",
     },
 
+    opts = {
+      inlay_hints = { enable = true },
+    },
+
     config = function()
       local cmp = require('cmp')
       local cmp_lsp = require("cmp_nvim_lsp")
@@ -28,16 +32,19 @@ return {
       require("neodev").setup({
         -- add any options here, or leave empty to use the default settings
       })
+
+      local lspconfig = require("lspconfig")
+      local util = require 'lspconfig.util'
+
       require("mason-lspconfig").setup({
         handlers = {
           function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup {
+            lspconfig[server_name].setup {
               capabilities = capabilities
             }
           end,
 
           ["lua_ls"] = function()
-            local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup {
               capabilities = capabilities,
               settings = {
@@ -55,16 +62,45 @@ return {
           end,
 
           ["typos_lsp"] = function()
-            local lspconfig = require("lspconfig")
             lspconfig.typos_lsp.setup {
               capabilities = capabilities,
             }
           end,
+
+          ["jdtls"] = function()
+            lspconfig.jdtls.setup {
+              capabilities = capabilities,
+              settings = {
+                java = {
+                  inlay_hints = {
+                    parameterNames = {
+                      enabled = "all",
+                      exclusions = { "this" },
+                    },
+                  },
+                }
+              },
+            }
+          end,
+
         }
       })
 
-      local util = require 'lspconfig.util'
-      local lspconfig = require("lspconfig")
+      lspconfig.go_pls.setup {
+        capabilities = capabilities,
+        settings = {
+          hints = {
+            rangeVariableTypes = true,
+            parameterNames = true,
+            constantValues = true,
+            assignVariableTypes = true,
+            compositeLiteralFields = true,
+            compositeLiteralTypes = true,
+            functionTypeParameters = true,
+          },
+        }
+      }
+
       lspconfig.dartls.setup {
         capabilities = capabilities,
         cmd = { "dart", "language-server", "--lsp" },
@@ -84,9 +120,12 @@ return {
             completeFunctionCalls = true,
             showTodos = true,
             enableSdkFormatter = true,
+            enableSnuppets = true,
+            updateImportsOnRename = true,
           },
         },
       }
+
 
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -111,7 +150,6 @@ return {
       })
 
       vim.diagnostic.config({
-        -- update_in_insert = true,
         float = {
           focusable = false,
           style = "minimal",

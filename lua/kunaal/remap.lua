@@ -8,7 +8,6 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 -- vim.keymap.set({ "n", "v" }, "gg=G", "<cmd>lua  vim.lsp.buf.format({ async = true })<CR>",
 --     { noremap = true, silent = true })
 
-
 local autocmd = vim.api.nvim_create_autocmd
 
 -- If a window exists to the right of the current window, returns it; else returns nil.
